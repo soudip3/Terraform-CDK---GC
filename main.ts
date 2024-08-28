@@ -2,6 +2,7 @@ import { Construct } from "constructs";
 import { App, TerraformStack } from "cdktf";
 import { GenesyscloudProvider } from './.gen/providers/genesyscloud/provider'
 import { RoutingQueue } from './.gen/providers/genesyscloud/routing-queue'
+import { TfExport } from './.gen/providers/genesyscloud/tf-export'
 
 class MyStack extends TerraformStack {
   constructor(scope: Construct, id: string) {
@@ -9,14 +10,19 @@ class MyStack extends TerraformStack {
 
     // define resources here
     new GenesyscloudProvider(this, "genesyscloudprovider", {
-      awsRegion: 'us-east-1',
-      oauthclientId: 'eee840f2-3062-4b53-b1df-99869fd30ba8',
-      oauthclientSecret: 'm_Z_BqhIYHCUhJ4vldsiAgbUZXVJz91ejLXLPB3K_Qk'
+      awsRegion: 'XXXXX',
+      oauthclientId: 'XXXXX',
+      oauthclientSecret: 'XXXXXX'
     })
-    new RoutingQueue(this, "mySimpleCDKQueue", {
-      name: "MySimpleCDKQueue",
+    new RoutingQueue(this, "q_Bulleye_Routing_Skill_Expression", {
+      name: "q_Bulleye_Routing_Skill_Expression",
       description: "Example Queue build by CDK"
-      
+    })
+    new TfExport(this, "myexport", {
+      directory: "./genesyscloud/export",
+      resourceTypes : ["genesyscloud_routing_queue"],
+      includeStateFile: true,
+      exportAsHcl: true
     })
   }
 }
