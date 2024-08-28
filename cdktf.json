@@ -1,0 +1,11 @@
+{
+  "language": "typescript",
+  "app": "npx ts-node main.ts",
+  "projectId": "42fe133b-16af-4804-a253-7226d4f4408b",
+  "sendCrashReports": "false",
+  "terraformProviders": [
+    "MyPureCloud/genesyscloud@~> 1.46"
+  ],
+  "terraformModules": [],
+  "context": {}
+}
